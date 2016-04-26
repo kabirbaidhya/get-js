@@ -1,29 +1,36 @@
-var resolved = {};
 
 import {isString, isArray} from './util';
 
+let resolved = {};
+
+function isResolved(src) {
+    return (
+        resolved[src] === true ||
+        !!document.querySelector(`script[src="${src}"]`)
+    );
+}
+
 function loadScript(src) {
-    if (resolved[src]) {
-        return Promise.resolve(resolved[src]);
+    if (isResolved(src)) {
+        return Promise.resolve(true);
     }
 
     var s = document.createElement('script');
 
     var promise = new Promise(function(resolve, reject) {
-
         s.src = src;
         s.async = false;
         s.type = 'text/javascript';
 
         s.onload = function() {
-            resolved[src] = true;
-            resolve(resolved[src]);
+            resolve(resolved[src] = true);
         };
 
         s.onerror = reject;
     });
 
-    document.body.appendChild(s);
+    var parent = document.body || document.head || document;
+    parent.appendChild(s);
 
     return promise;
 }

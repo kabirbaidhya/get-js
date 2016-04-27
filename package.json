@@ -34,7 +34,8 @@
     "es6"
   ],
   "files": [
-    "lib/",
+    "lib",
+    "dist",
     "index.js",
     "LICENSE",
     "README.md",

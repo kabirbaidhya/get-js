@@ -1,54 +1,67 @@
-
-import {isString, isArray} from './util';
+import {isString, isArray, isFunction} from './util';
 
 let resolved = {};
 
-function isResolved(src) {
-    return (
-        resolved[src] === true ||
-        !!document.querySelector(`script[src="${src}"]`)
-    );
-}
+function loadScript(url, callback, errorCallback) {
+    var invokeCallback = function() {
+        resolved[url] = true;
 
-function loadScript(src) {
-    if (isResolved(src)) {
-        return Promise.resolve(true);
+        if (isFunction(callback)) {
+            callback();
+        }
+    };
+
+    if (resolved[url]) {
+        invokeCallback();
+
+        return;
     }
 
-    var s = document.createElement('script');
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
 
-    var promise = new Promise(function(resolve, reject) {
-        s.src = src;
-        s.async = false;
-        s.type = 'text/javascript';
-
-        s.onload = function() {
-            resolve(resolved[src] = true);
+    if (script.readyState) { //IE
+        script.onreadystatechange = function() {
+            if (script.readyState == 'loaded' || script.readyState == 'complete') {
+                script.onreadystatechange = null;
+                invokeCallback();
+            }
         };
+    } else { //Others
+        script.onload = function() {
+            invokeCallback();
+        };
+    }
 
-        s.onerror = reject;
-    });
+    script.onerror = function(e) {
+        resolved[url] = false;
+        console.log('error', e);
+        if (isFunction(errorCallback)) {
+            errorCallback();
+        }
+    };
 
+    script.src = url;
     var parent = document.body || document.head || document;
-    parent.appendChild(s);
-
-    return promise;
+    parent.appendChild(script);
 }
 
 function get(src, opts) {
     if (isString(src)) {
-        return loadScript(src);
-    } else if (isArray(src) && src.length > 0) {
-        var p;
+        return new Promise((resolve, reject) => {
+            loadScript(src, () => resolve(true), () => reject());
+        });
+    } else if(isArray(src)) {
+        let p = Promise.resolve(true);
 
-        src.forEach(function(url) {
-            p = p ? p.then(get(url)) : get(url);
+        src.forEach((url) => {
+            p = p.then(() => get(url));
         });
 
         return p;
-    } else {
-        throw new Error('Invalid argument for get()');
     }
+
+    throw new Error('Invalid argument for get()');
 }
 
 export default get;

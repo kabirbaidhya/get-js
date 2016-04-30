@@ -64,53 +64,86 @@ window["get"] =
 	    value: true
 	});
 	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
 	var _util = __webpack_require__(/*! ./util */ 2);
 	
 	var resolved = {};
 	
-	function isResolved(src) {
-	    return resolved[src] === true || !!document.querySelector('script[src="' + src + '"]');
-	}
+	function loadScript(url, callback, errorCallback) {
+	    var invokeCallback = function invokeCallback() {
+	        resolved[url] = true;
 	
-	function loadScript(src) {
-	    if (isResolved(src)) {
-	        return Promise.resolve(true);
+	        if ((0, _util.isFunction)(callback)) {
+	            callback();
+	        }
+	    };
+	
+	    if (resolved[url]) {
+	        invokeCallback();
+	
+	        return;
 	    }
 	
-	    var s = document.createElement('script');
+	    var script = document.createElement('script');
+	    script.type = 'text/javascript';
 	
-	    var promise = new Promise(function (resolve, reject) {
-	        s.src = src;
-	        s.async = false;
-	        s.type = 'text/javascript';
-	
-	        s.onload = function () {
-	            resolve(resolved[src] = true);
+	    if (script.readyState) {
+	        //IE
+	        script.onreadystatechange = function () {
+	            if (script.readyState == 'loaded' || script.readyState == 'complete') {
+	                script.onreadystatechange = null;
+	                invokeCallback();
+	            }
 	        };
+	    } else {
+	        //Others
+	        script.onload = function () {
+	            invokeCallback();
+	        };
+	    }
 	
-	        s.onerror = reject;
-	    });
+	    script.onerror = function (e) {
+	        resolved[url] = false;
+	        console.log('error', e);
+	        if ((0, _util.isFunction)(errorCallback)) {
+	            errorCallback();
+	        }
+	    };
 	
+	    script.src = url;
 	    var parent = document.body || document.head || document;
-	    parent.appendChild(s);
-	
-	    return promise;
+	    parent.appendChild(script);
 	}
 	
 	function get(src, opts) {
 	    if ((0, _util.isString)(src)) {
-	        return loadScript(src);
-	    } else if ((0, _util.isArray)(src) && src.length > 0) {
-	        var p;
-	
-	        src.forEach(function (url) {
-	            p = p ? p.then(get(url)) : get(url);
+	        return new Promise(function (resolve, reject) {
+	            loadScript(src, function () {
+	                return resolve(true);
+	            }, function () {
+	                return reject();
+	            });
 	        });
+	    } else if ((0, _util.isArray)(src)) {
+	        var _ret = function () {
+	            var p = Promise.resolve(true);
 	
-	        return p;
-	    } else {
-	        throw new Error('Invalid argument for get()');
+	            src.forEach(function (url) {
+	                p = p.then(function () {
+	                    return get(url);
+	                });
+	            });
+	
+	            return {
+	                v: p
+	            };
+	        }();
+	
+	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	    }
+	
+	    throw new Error('Invalid argument for get()');
 	}
 	
 	exports.default = get;
@@ -134,7 +167,7 @@ window["get"] =
 	  return typeof v === 'string';
 	};
 	var isFunction = function isFunction(v) {
-	  return typeof c === 'function';
+	  return typeof v === 'function';
 	};
 	
 	exports.isArray = isArray;

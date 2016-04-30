@@ -1,7 +1,7 @@
 {
   "name": "get-js",
   "version": "0.0.2-0",
-  "description": "A Promise based package to load scripts dynamically",
+  "description": "A lightweight promise based package to load scripts on the fly",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {

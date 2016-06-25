@@ -17,10 +17,13 @@ $ npm install es6-promise
 ```
 
 ## Usage
-Include the package using common js `require()`:
+Include the package using Common JS `require()` or ES2015 `import`:
 
 ```javascript
 var get = require('get-js');
+
+// ES2015+
+import get from 'get-js';
 ```
 
 Or, using `<script>` tags:

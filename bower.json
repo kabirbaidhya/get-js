@@ -1,7 +1,6 @@
 {
   "name": "get-js",
   "description": "A lightweight promise based package to load scripts on the fly",
-  "main": "dist/get.js",
   "authors": [
     "Kabir Baidhya <kabirbaidhya@gmail.com>"
   ],

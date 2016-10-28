@@ -57,3 +57,34 @@ get([
     console.log('error');
 });
 ```
+
+## Using in Angular Projects
+You can also inject this in your angular files as a `$q` friendly angular service.
+
+Require the angular module using
+```javascript
+var angularGetJs = require('get-js/angular'); 
+```
+Or
+```html
+<script type="text/javascript" src="/path/to/get-js/dist/angular-get.min.js"></script>
+```
+
+Then you should be able to use it like this
+```javascript
+
+// Add the module as a dependeny in your app
+angular.module('app', ['angularGetJs']);
+
+// Inject the service
+angular.module('app')
+    .controller('MyController', ['get', function(get) {
+        get('/some/script.js')
+            .then(function() {
+                console.log('do something now');
+            })
+            .catch(function() {
+                console.log('error');
+            });
+    }]);
+```

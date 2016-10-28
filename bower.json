@@ -1,7 +1,6 @@
 {
   "name": "get-js",
   "description": "A lightweight promise based package to load scripts on the fly",
-  "main": "dist/get.js",
   "authors": [
     "Kabir Baidhya <kabirbaidhya@gmail.com>"
   ],
@@ -16,7 +15,9 @@
     "get-js",
     "async",
     "get",
-    "es6"
+    "es6",
+    "angular",
+    "$q"
   ],
   "homepage": "https://github.com/kabirbaidhya/get-js",
   "ignore": [
@@ -25,7 +26,12 @@
     "bower_components",
     "test",
     "tests",
-    "webpack.config.js",
-    "index.js"
-  ]
+    "resources",
+    "angular.js",
+    "index.js",
+    "lib"
+  ],
+  "dependencies": {
+    "angular": "^1.3.*"
+  }
 }

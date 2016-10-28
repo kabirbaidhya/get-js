@@ -1,0 +1,31 @@
+{
+  "name": "get-js",
+  "description": "A lightweight promise based package to load scripts on the fly",
+  "main": "dist/get.js",
+  "authors": [
+    "Kabir Baidhya <kabirbaidhya@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "javascript",
+    "dynamically",
+    "load-script",
+    "get-script",
+    "load-js",
+    "promise",
+    "get-js",
+    "async",
+    "get",
+    "es6"
+  ],
+  "homepage": "https://github.com/kabirbaidhya/get-js",
+  "ignore": [
+    "src",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "webpack.config.js",
+    "index.js"
+  ]
+}

@@ -8,7 +8,14 @@ A lightweight promise based package to load scripts on the fly.
 ## Installation
 
 ```bash
+# Using npm
 $ npm install get-js --save
+
+# Using Yarn
+$ yarn add get-js
+
+# Using Bower
+$ bower install get-js --save
 ```
 
 You'll also need a [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise) polyfill for [older browsers](http://caniuse.com/#feat=promises).

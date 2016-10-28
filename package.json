@@ -1,6 +1,6 @@
 {
   "name": "get-js",
-  "version": "0.0.3",
+  "version": "0.0.4-0",
   "description": "A lightweight promise based package to load scripts on the fly",
   "main": "index.js",
   "dependencies": {

@@ -25,7 +25,9 @@
     "bower_components",
     "test",
     "tests",
-    "webpack.config.js",
-    "index.js"
+    "resources",
+    "angular.js",
+    "index.js",
+    "lib"
   ]
 }

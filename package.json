@@ -14,7 +14,7 @@
   },
   "scripts": {
     "transpile": "babel src -d lib",
-    "bundle": "webpack -d --output-filename get.js && webpack -p --output-filename get.min.js",
+    "bundle": "./resources/scripts/bundle.sh",
     "build": "npm run transpile && npm run bundle",
     "prepublish": "npm run build"
   },

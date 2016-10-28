@@ -15,7 +15,9 @@
     "get-js",
     "async",
     "get",
-    "es6"
+    "es6",
+    "angular",
+    "$q"
   ],
   "homepage": "https://github.com/kabirbaidhya/get-js",
   "ignore": [

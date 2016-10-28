@@ -33,7 +33,9 @@
     "get-js",
     "async",
     "get",
-    "es6"
+    "es6",
+    "angular",
+    "$q"
   ],
   "files": [
     "lib",

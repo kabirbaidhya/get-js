@@ -28,5 +28,8 @@
     "angular.js",
     "index.js",
     "lib"
-  ]
+  ],
+  "dependencies": {
+    "angular": "^1.3.*"
+  }
 }

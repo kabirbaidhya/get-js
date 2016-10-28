@@ -5,6 +5,10 @@ module.exports = {
         path: './dist'
     },
     entry: {
-        library: './index'
+        library: './index',
+        'angular-get-js': './angular'
+    },
+    externals: {
+        'angular': 'angular'
     }
 };

@@ -46,25 +46,23 @@ window["get"] =
 /*!******************!*\
   !*** ./index.js ***!
   \******************/
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(/*! ./lib/get.js */ 1).default;
 
 
-/***/ },
+/***/ }),
 /* 1 */
 /*!********************!*\
   !*** ./lib/get.js ***!
   \********************/
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 	
 	var _util = __webpack_require__(/*! ./util */ 2);
 	
@@ -126,21 +124,15 @@ window["get"] =
 	            });
 	        });
 	    } else if ((0, _util.isArray)(src)) {
-	        var _ret = function () {
-	            var p = Promise.resolve(true);
+	        var p = Promise.resolve(true);
 	
-	            src.forEach(function (url) {
-	                p = p.then(function () {
-	                    return get(url);
-	                });
+	        src.forEach(function (url) {
+	            p = p.then(function () {
+	                return get(url);
 	            });
+	        });
 	
-	            return {
-	                v: p
-	            };
-	        }();
-	
-	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	        return p;
 	    }
 	
 	    throw new Error('Invalid argument for get()');
@@ -148,12 +140,12 @@ window["get"] =
 	
 	exports.default = get;
 
-/***/ },
+/***/ }),
 /* 2 */
 /*!*********************!*\
   !*** ./lib/util.js ***!
   \*********************/
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 	
@@ -174,6 +166,6 @@ window["get"] =
 	exports.isString = isString;
 	exports.isFunction = isFunction;
 
-/***/ }
+/***/ })
 /******/ ]);
 //# sourceMappingURL=get.js.map

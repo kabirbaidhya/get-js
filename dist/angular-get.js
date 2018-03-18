@@ -45,17 +45,17 @@
 /*!********************!*\
   !*** ./angular.js ***!
   \********************/
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(/*! ./lib/angular/module */ 1).default;
 
 
-/***/ },
+/***/ }),
 /* 1 */
 /*!*******************************!*\
   !*** ./lib/angular/module.js ***!
   \*******************************/
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -79,21 +79,21 @@
 	
 	exports.default = getModule.name;
 
-/***/ },
+/***/ }),
 /* 2 */
 /*!**************************!*\
   !*** external "angular" ***!
   \**************************/
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = angular;
 
-/***/ },
+/***/ }),
 /* 3 */
 /*!***********************************!*\
   !*** ./lib/angular/GetService.js ***!
   \***********************************/
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -116,20 +116,18 @@
 	    };
 	}
 
-/***/ },
+/***/ }),
 /* 4 */
 /*!********************!*\
   !*** ./lib/get.js ***!
   \********************/
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 	
 	var _util = __webpack_require__(/*! ./util */ 5);
 	
@@ -191,21 +189,15 @@
 	            });
 	        });
 	    } else if ((0, _util.isArray)(src)) {
-	        var _ret = function () {
-	            var p = Promise.resolve(true);
+	        var p = Promise.resolve(true);
 	
-	            src.forEach(function (url) {
-	                p = p.then(function () {
-	                    return get(url);
-	                });
+	        src.forEach(function (url) {
+	            p = p.then(function () {
+	                return get(url);
 	            });
+	        });
 	
-	            return {
-	                v: p
-	            };
-	        }();
-	
-	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	        return p;
 	    }
 	
 	    throw new Error('Invalid argument for get()');
@@ -213,12 +205,12 @@
 	
 	exports.default = get;
 
-/***/ },
+/***/ }),
 /* 5 */
 /*!*********************!*\
   !*** ./lib/util.js ***!
   \*********************/
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 	
@@ -239,6 +231,6 @@
 	exports.isString = isString;
 	exports.isFunction = isFunction;
 
-/***/ }
+/***/ })
 /******/ ]);
 //# sourceMappingURL=angular-get.js.map

@@ -5,7 +5,7 @@
  * @returns {boolean}
  */
 export function isArray(value) {
-    return Object.prototype.toString.call(value) === '[object Array]';
+  return Object.prototype.toString.call(value) === '[object Array]';
 }
 
 /**
@@ -15,7 +15,7 @@ export function isArray(value) {
  * @returns {boolean}
  */
 export function isString(value) {
-    return typeof value === 'string';
+  return typeof value === 'string';
 }
 
 /**
@@ -25,5 +25,5 @@ export function isString(value) {
  * @returns {boolean}
  */
 export function isFunction(value) {
-    return typeof value === 'function';
+  return typeof value === 'function';
 }

@@ -9,5 +9,5 @@ GetService.$inject = ['$q'];
  * @returns {*}
  */
 export default function GetService($q) {
-    return (src, opts) => $q.resolve(get(src, opts));
+  return (src, opts) => $q.resolve(get(src, opts));
 }

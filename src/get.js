@@ -11,49 +11,49 @@ let resolved = {};
  * @returns {void}
  */
 function loadScript(url, callback, errorCallback) {
-    let invokeCallback = function() {
-        resolved[url] = true;
+  let invokeCallback = function() {
+    resolved[url] = true;
 
-        if (isFunction(callback)) {
-            callback();
-        }
-    };
+    if (isFunction(callback)) {
+      callback();
+    }
+  };
 
-    if (resolved[url]) {
+  if (resolved[url]) {
+    invokeCallback();
+
+    return;
+  }
+
+  let script = document.createElement('script');
+  script.type = 'text/javascript';
+
+  if (script.readyState) {
+    // IE
+    script.onreadystatechange = function() {
+      if (script.readyState == 'loaded' || script.readyState == 'complete') {
+        script.onreadystatechange = null;
         invokeCallback();
-
-        return;
-    }
-
-    let script = document.createElement('script');
-    script.type = 'text/javascript';
-
-    if (script.readyState) {
-        // IE
-        script.onreadystatechange = function() {
-            if (script.readyState == 'loaded' || script.readyState == 'complete') {
-                script.onreadystatechange = null;
-                invokeCallback();
-            }
-        };
-    } else {
-        // Others
-        script.onload = function() {
-            invokeCallback();
-        };
-    }
-
-    script.onerror = function(e) {
-        resolved[url] = false;
-        console.log('error', e);
-        if (isFunction(errorCallback)) {
-            errorCallback();
-        }
+      }
     };
+  } else {
+    // Others
+    script.onload = function() {
+      invokeCallback();
+    };
+  }
 
-    script.src = url;
-    let parent = document.body || document.head || document;
-    parent.appendChild(script);
+  script.onerror = function(e) {
+    resolved[url] = false;
+    console.log('error', e);
+    if (isFunction(errorCallback)) {
+      errorCallback();
+    }
+  };
+
+  script.src = url;
+  let parent = document.body || document.head || document;
+  parent.appendChild(script);
 }
 
 /**
@@ -65,21 +65,21 @@ function loadScript(url, callback, errorCallback) {
  * @returns {Promise}
  */
 function get(src, opts) {
-    if (isString(src)) {
-        return new Promise((resolve, reject) => {
-            loadScript(src, () => resolve(true), () => reject());
-        });
-    } else if (isArray(src)) {
-        let p = Promise.resolve(true);
+  if (isString(src)) {
+    return new Promise((resolve, reject) => {
+      loadScript(src, () => resolve(true), () => reject());
+    });
+  } else if (isArray(src)) {
+    let p = Promise.resolve(true);
 
-        src.forEach(url => {
-            p = p.then(() => get(url));
-        });
+    src.forEach(url => {
+      p = p.then(() => get(url));
+    });
 
-        return p;
-    }
+    return p;
+  }
 
-    throw new Error('Invalid argument for get()');
+  throw new Error('Invalid argument for get()');
 }
 
 export default get;

@@ -1,9 +1,9 @@
-# Get JS
+# get-js
 
 [![NPM Version](https://img.shields.io/npm/v/get-js.svg?style=flat-square)](https://www.npmjs.com/package/get-js)
 [![NPM Downloads](https://img.shields.io/npm/dt/get-js.svg?style=flat-square)](https://www.npmjs.com/package/get-js)
 
-A lightweight promise based package to load scripts on the fly.
+A lightweight library to asynchronously load scripts on the fly.
 
 ## Installation
 
@@ -18,7 +18,7 @@ $ yarn add get-js
 $ bower install get-js --save
 ```
 
-You'll also need a [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise) polyfill for [older browsers](http://caniuse.com/#feat=promises).
+For [older browsers](http://caniuse.com/#feat=promises) you may also need a [promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise) polyfill.
 
 ```bash
 # Install promise polyfill.
@@ -27,7 +27,7 @@ $ npm install es6-promise
 
 ## Usage
 
-Include the package using Common JS `require()` or ES2015 `import`:
+Use it in your project with `require` or `import` as an ES module.
 
 ```javascript
 var get = require('get-js');
@@ -45,7 +45,7 @@ Or, using `<script>` tags:
 Here you go:
 
 ```javascript
-// Load single script
+// Load a single script
 get('https://code.jquery.com/jquery-2.2.3.min.js').then(function() {
   console.log('do something');
 });
@@ -60,11 +60,11 @@ get(['/js/abc.js', '/js/xyz.js'])
   });
 ```
 
-## Using in Angular Projects
+## Using with Angular
 
 **Note: This refers to [angular 1.x](https://angularjs.org/) projects.**
 
-You can also inject this in your angular files as a [`$q`](https://docs.angularjs.org/api/ng/service/$q) friendly angular service.
+You can inject this in your angular code as a service.
 
 Require the angular module using
 

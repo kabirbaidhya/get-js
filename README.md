@@ -47,17 +47,17 @@ Here you go:
 ```javascript
 // Load single script
 get('https://code.jquery.com/jquery-2.2.3.min.js').then(function() {
-    console.log('do something');
+  console.log('do something');
 });
 
 // Load multiple scripts, without changing the order
 get(['/js/abc.js', '/js/xyz.js'])
-    .then(function() {
-        console.log('do something now');
-    })
-    .catch(function() {
-        console.log('error');
-    });
+  .then(function() {
+    console.log('do something now');
+  })
+  .catch(function() {
+    console.log('error');
+  });
 ```
 
 ## Using in Angular Projects
@@ -79,21 +79,21 @@ Or
 Then you should be able to use it like this
 
 ```javascript
-// Add the module as a dependeny in your app
+// Add the module as a dependency in your app.
 angular.module('app', ['angularGetJs']);
 
 // Inject the service
 angular.module('app').controller('MyController', [
-    'get',
-    function(get) {
-        get('/some/script.js')
-            .then(function() {
-                console.log('do something now');
-            })
-            .catch(function() {
-                console.log('error');
-            });
-    }
+  'get',
+  function(get) {
+    get('/some/script.js')
+      .then(function() {
+        console.log('do something now');
+      })
+      .catch(function() {
+        console.log('error');
+      });
+  }
 ]);
 ```
 

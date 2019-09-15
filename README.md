@@ -62,7 +62,9 @@ get(['/js/abc.js', '/js/xyz.js'])
 
 ## Using in Angular Projects
 
-You can also inject this in your angular files as a `$q` friendly angular service.
+**Note: This refers to [angular 1.x](https://angularjs.org/) projects.**
+
+You can also inject this in your angular files as a [`$q`](https://docs.angularjs.org/api/ng/service/$q) friendly angular service.
 
 Require the angular module using
 

@@ -1,9 +1,7 @@
 {
   "name": "get-js",
-  "description": "A lightweight promise based package to load scripts on the fly",
-  "authors": [
-    "Kabir Baidhya <kabirbaidhya@gmail.com>"
-  ],
+  "description": "A lightweight library to asynchronously load scripts on the fly.",
+  "authors": ["Kabir Baidhya <kabirbaidhya@gmail.com>"],
   "license": "MIT",
   "keywords": [
     "javascript",
@@ -20,15 +18,5 @@
     "$q"
   ],
   "homepage": "https://github.com/kabirbaidhya/get-js",
-  "ignore": [
-    "src",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests",
-    "resources",
-    "angular.js",
-    "index.js",
-    "lib"
-  ]
+  "ignore": ["src", "node_modules", "bower_components", "test", "tests", "resources", "angular.js", "index.js", "lib"]
 }

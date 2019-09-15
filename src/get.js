@@ -2,6 +2,14 @@ import { isString, isArray, isFunction } from './util';
 
 let resolved = {};
 
+/**
+ * Load javascript url asynchronously.
+ *
+ * @param {*} url               The javascript url to load.
+ * @param {*} callback          Callback function to invoke on success.
+ * @param {*} errorCallback     Callback function to invoke on error.
+ * @returns {void}
+ */
 function loadScript(url, callback, errorCallback) {
     let invokeCallback = function() {
         resolved[url] = true;
@@ -21,7 +29,7 @@ function loadScript(url, callback, errorCallback) {
     script.type = 'text/javascript';
 
     if (script.readyState) {
-        //IE
+        // IE
         script.onreadystatechange = function() {
             if (script.readyState == 'loaded' || script.readyState == 'complete') {
                 script.onreadystatechange = null;
@@ -29,7 +37,7 @@ function loadScript(url, callback, errorCallback) {
             }
         };
     } else {
-        //Others
+        // Others
         script.onload = function() {
             invokeCallback();
         };
@@ -48,6 +56,14 @@ function loadScript(url, callback, errorCallback) {
     parent.appendChild(script);
 }
 
+/**
+ * Load javascript url (or a list of urls) asynchronously
+ * and return a Promise instance.
+ *
+ * @param {*} src
+ * @param {*} opts
+ * @returns {Promise}
+ */
 function get(src, opts) {
     if (isString(src)) {
         return new Promise((resolve, reject) => {

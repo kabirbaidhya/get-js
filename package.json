@@ -2,6 +2,8 @@
   "name": "get-js",
   "version": "0.0.5",
   "description": "A lightweight promise based package to load scripts on the fly",
+  "unpkg": "dist/",
+  "jsdelivr": "dist/",
   "main": "index.js",
   "devDependencies": {
     "@babel/cli": "^7.6.0",

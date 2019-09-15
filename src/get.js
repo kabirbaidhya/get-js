@@ -1,4 +1,4 @@
-import {isString, isArray, isFunction} from './util';
+import { isString, isArray, isFunction } from './util';
 
 let resolved = {};
 
@@ -17,17 +17,19 @@ function loadScript(url, callback, errorCallback) {
         return;
     }
 
-    var script = document.createElement('script')
+    var script = document.createElement('script');
     script.type = 'text/javascript';
 
-    if (script.readyState) { //IE
+    if (script.readyState) {
+        //IE
         script.onreadystatechange = function() {
             if (script.readyState == 'loaded' || script.readyState == 'complete') {
                 script.onreadystatechange = null;
                 invokeCallback();
             }
         };
-    } else { //Others
+    } else {
+        //Others
         script.onload = function() {
             invokeCallback();
         };
@@ -51,10 +53,10 @@ function get(src, opts) {
         return new Promise((resolve, reject) => {
             loadScript(src, () => resolve(true), () => reject());
         });
-    } else if(isArray(src)) {
+    } else if (isArray(src)) {
         let p = Promise.resolve(true);
 
-        src.forEach((url) => {
+        src.forEach(url => {
             p = p.then(() => get(url));
         });
 

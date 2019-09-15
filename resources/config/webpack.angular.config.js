@@ -6,6 +6,6 @@ module.exports = {
         'angular-get': './angular'
     },
     externals: {
-        'angular': 'angular'
+        angular: 'angular'
     }
 };

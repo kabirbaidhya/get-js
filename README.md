@@ -2,7 +2,6 @@
 
 [![NPM Version](https://img.shields.io/npm/v/get-js.svg?style=flat-square)](https://www.npmjs.com/package/get-js)
 [![NPM Downloads](https://img.shields.io/npm/dt/get-js.svg?style=flat-square)](https://www.npmjs.com/package/get-js)
-[![Code Climate](https://img.shields.io/codeclimate/github/kabirbaidhya/get-js.svg?style=flat-square)](https://codeclimate.com/github/kabirbaidhya/get-js)
 
 A lightweight promise based package to load scripts on the fly.
 

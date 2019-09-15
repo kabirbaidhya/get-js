@@ -3,7 +3,7 @@ import { isString, isArray, isFunction } from './util';
 let resolved = {};
 
 function loadScript(url, callback, errorCallback) {
-    var invokeCallback = function() {
+    let invokeCallback = function() {
         resolved[url] = true;
 
         if (isFunction(callback)) {
@@ -17,7 +17,7 @@ function loadScript(url, callback, errorCallback) {
         return;
     }
 
-    var script = document.createElement('script');
+    let script = document.createElement('script');
     script.type = 'text/javascript';
 
     if (script.readyState) {
@@ -44,7 +44,7 @@ function loadScript(url, callback, errorCallback) {
     };
 
     script.src = url;
-    var parent = document.body || document.head || document;
+    let parent = document.body || document.head || document;
     parent.appendChild(script);
 }
 

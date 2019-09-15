@@ -39,7 +39,7 @@ import get from 'get-js';
 Or, using `<script>` tags:
 
 ```html
-<script type="text/javascript" src="/path/to/get-js/dist/get.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/get-js@0.0.6/dist/get.min.js"></script>
 ```
 
 Here you go:
@@ -75,10 +75,10 @@ var angularGetJs = require('get-js/angular');
 Or
 
 ```html
-<script type="text/javascript" src="/path/to/get-js/dist/angular-get.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/get-js@0.0.6/dist/angular-get.min.js"></script>
 ```
 
-Then you should be able to use it like this
+Then you should be able to use it like this:
 
 ```javascript
 // Add the module as a dependency in your app.

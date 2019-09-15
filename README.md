@@ -2,7 +2,6 @@
 
 [![NPM Version](https://img.shields.io/npm/v/get-js.svg?style=flat-square)](https://www.npmjs.com/package/get-js)
 [![NPM Downloads](https://img.shields.io/npm/dt/get-js.svg?style=flat-square)](https://www.npmjs.com/package/get-js)
-[![Code Climate](https://img.shields.io/codeclimate/github/kabirbaidhya/get-js.svg?style=flat-square)](https://codeclimate.com/github/kabirbaidhya/get-js)
 
 A lightweight promise based package to load scripts on the fly.
 
@@ -21,7 +20,8 @@ $ bower install get-js --save
 
 You'll also need a [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise) polyfill for [older browsers](http://caniuse.com/#feat=promises).
 
-```
+```bash
+# Install promise polyfill.
 $ npm install es6-promise
 ```
 
@@ -47,22 +47,24 @@ Here you go:
 ```javascript
 // Load single script
 get('https://code.jquery.com/jquery-2.2.3.min.js').then(function() {
-    console.log('do something');
+  console.log('do something');
 });
 
 // Load multiple scripts, without changing the order
 get(['/js/abc.js', '/js/xyz.js'])
-    .then(function() {
-        console.log('do something now');
-    })
-    .catch(function() {
-        console.log('error');
-    });
+  .then(function() {
+    console.log('do something now');
+  })
+  .catch(function() {
+    console.log('error');
+  });
 ```
 
 ## Using in Angular Projects
 
-You can also inject this in your angular files as a `$q` friendly angular service.
+**Note: This refers to [angular 1.x](https://angularjs.org/) projects.**
+
+You can also inject this in your angular files as a [`$q`](https://docs.angularjs.org/api/ng/service/$q) friendly angular service.
 
 Require the angular module using
 
@@ -79,21 +81,21 @@ Or
 Then you should be able to use it like this
 
 ```javascript
-// Add the module as a dependeny in your app
+// Add the module as a dependency in your app.
 angular.module('app', ['angularGetJs']);
 
 // Inject the service
 angular.module('app').controller('MyController', [
-    'get',
-    function(get) {
-        get('/some/script.js')
-            .then(function() {
-                console.log('do something now');
-            })
-            .catch(function() {
-                console.log('error');
-            });
-    }
+  'get',
+  function(get) {
+    get('/some/script.js')
+      .then(function() {
+        console.log('do something now');
+      })
+      .catch(function() {
+        console.log('error');
+      });
+  }
 ]);
 ```
 

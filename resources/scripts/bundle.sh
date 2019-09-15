@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Clean previously bundled files 
+# Clean previously bundled files
 rm -rf dist/
 
 # Build the main library files

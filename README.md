@@ -21,7 +21,8 @@ $ bower install get-js --save
 
 You'll also need a [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise) polyfill for [older browsers](http://caniuse.com/#feat=promises).
 
-```
+```bash
+# Install promise polyfill.
 $ npm install es6-promise
 ```
 

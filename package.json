@@ -13,8 +13,8 @@
   "scripts": {
     "transpile": "babel src -d lib",
     "bundle": "./resources/scripts/bundle.sh",
-    "build": "npm run transpile && npm run bundle",
-    "prepublish": "npm run build"
+    "build": "yarn transpile && yarn bundle",
+    "prepublish": "yarn build"
   },
   "repository": {
     "type": "git",

@@ -18,10 +18,7 @@ function loadScript(
   errorCallback = () => {}
 ) {
   //fail safe check for empty/null values
-  if (!url) {
-    return;
-  }
-  if (!type) {
+  if (!url ||!type) {
     return;
   }
 
@@ -75,7 +72,6 @@ function loadScript(
 
   element.onerror = function(e) {
     resolved[url] = false;
-    console.log("error", e);
     if (isFunction(errorCallback)) {
       errorCallback();
     }

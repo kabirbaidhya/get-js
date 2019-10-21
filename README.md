@@ -31,7 +31,7 @@ $ npm install es6-promise
 Use it in your project with `require` or `import` as an ES module.
 
 ```javascript
-var get = require('get-js');
+const get = require('get-js');
 
 // ES2015+
 import get from 'get-js';
@@ -70,7 +70,7 @@ You can inject this in your angular code as a service.
 Require the angular module using
 
 ```javascript
-var angularGetJs = require('get-js/angular');
+const angularGetJs = require('get-js/angular');
 ```
 
 Or

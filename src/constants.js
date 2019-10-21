@@ -1,4 +1,2 @@
-export const ELEMENT_TYPE = {
-  JS: 'text/javascript',
-  CSS: 'text/css',
-};
+export const FILE_JAVASCRIPT = 'text/javascript';
+export const FILE_CSS = 'text/css';

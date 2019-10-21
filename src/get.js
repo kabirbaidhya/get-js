@@ -5,7 +5,7 @@ import {
   createElement,
   determineFileType,
 } from './util';
-import { ELEMENT_TYPE } from './constants';
+import { FILE_CSS, FILE_JAVASCRIPT } from './constants';
 
 const resolved = {};
 
@@ -20,7 +20,7 @@ const resolved = {};
  */
 function loadScript(
   url,
-  type = ELEMENT_TYPE.JS,
+  type = FILE_JAVASCRIPT,
   callback = () => {},
   errorCallback = () => {}
 ) {
@@ -84,7 +84,7 @@ function loadScript(
   // Append the elemnt to the parent element
   let parent = document.body || document.head || document;
 
-  if (type === ELEMENT_TYPE.CSS) {
+  if (type === FILE_CSS) {
     parent = document.head;
   }
   parent.appendChild(element);

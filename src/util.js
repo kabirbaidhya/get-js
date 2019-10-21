@@ -1,4 +1,4 @@
-import { ELEMENT_TYPE } from './constants';
+import { FILE_CSS, FILE_JAVASCRIPT } from './constants';
 
 /**
  * Checks if the given value is an array.
@@ -41,16 +41,16 @@ export function isFunction(value) {
 export function createElement(url, type) {
   let element = null;
 
-  if (type === ELEMENT_TYPE.CSS) {
+  if (type === FILE_CSS) {
     element = document.createElement('link');
     element.rel = 'stylesheet';
-    element.type = ELEMENT_TYPE.CSS;
+    element.type = FILE_CSS;
     element.href = url;
 
     return element;
-  } else if (type === ELEMENT_TYPE.JS) {
+  } else if (type === FILE_JAVASCRIPT) {
     element = document.createElement('script');
-    element.type = ELEMENT_TYPE.JS;
+    element.type = FILE_JAVASCRIPT;
     element.src = url;
 
     return element;
@@ -60,7 +60,8 @@ export function createElement(url, type) {
 }
 
 /**
- *
+ * This Function determines the file type based on the URL passed
+ * currently only support JS and CSS files.
  *
  * @param {*} url
  * @returns
@@ -69,9 +70,9 @@ export function determineFileType(url) {
   const extension = url.substring(url.lastIndexOf('.'));
 
   if (extension === '.js') {
-    return ELEMENT_TYPE.JS;
+    return FILE_JAVASCRIPT;
   } else if (extension === '.css') {
-    return ELEMENT_TYPE.CSS;
+    return FILE_CSS;
   } else {
     return null;
   }

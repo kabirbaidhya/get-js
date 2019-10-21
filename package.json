@@ -17,6 +17,7 @@
     "webpack-cli": "^3.3.8"
   },
   "scripts": {
+    "lint": "eslint --fix src resources angular.js index.js",
     "transpile": "babel src -d lib",
     "bundle": "./resources/scripts/bundle.sh",
     "build": "yarn transpile && yarn bundle",

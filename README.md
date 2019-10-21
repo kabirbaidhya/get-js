@@ -61,6 +61,20 @@ get(['/js/abc.js', '/js/xyz.js'])
   });
 ```
 
+If you're using ES2015+ / TypeScript codebase, you can also use `async` / `await` syntax with `get`:
+
+```js
+import get from 'get-js';
+
+(async () => {
+  await get('https://code.jquery.com/jquery-2.2.3.min.js'); // Gets jQuery.
+
+  $(document).on('ready', () => {
+    console.log('Ready!');
+  });
+})();
+```
+
 ## Using with Angular
 
 **Note: This refers to [angular 1.x](https://angularjs.org/) projects.**

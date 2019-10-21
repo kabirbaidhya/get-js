@@ -5,6 +5,7 @@ import {
   createElement,
   determineFileType,
 } from './util';
+import { ELEMENT_TYPE } from './constants';
 
 const resolved = {};
 
@@ -19,7 +20,7 @@ const resolved = {};
  */
 function loadScript(
   url,
-  type = 'text/javascript',
+  type = ELEMENT_TYPE.JS,
   callback = () => {},
   errorCallback = () => {}
 ) {
@@ -83,7 +84,7 @@ function loadScript(
   // Append the elemnt to the parent element
   let parent = document.body || document.head || document;
 
-  if (type === 'text/css') {
+  if (type === ELEMENT_TYPE.CSS) {
     parent = document.head;
   }
   parent.appendChild(element);
@@ -100,7 +101,6 @@ function loadScript(
 function get(src, type) {
   if (isString(src)) {
     // If src is string url
-
     type = type || determineFileType(src);
 
     return new Promise((resolve, reject) => {
@@ -108,7 +108,6 @@ function get(src, type) {
     });
   } else if (isArray(src)) {
     // else if src data is arrray by recursion loop all the array and sub array
-
     let p = Promise.resolve(true);
 
     src.forEach(url => {

@@ -1,3 +1,5 @@
+import { ELEMENT_TYPE } from './constants';
+
 /**
  * Checks if the given value is an array.
  *
@@ -39,20 +41,23 @@ export function isFunction(value) {
 export function createElement(url, type) {
   let element = null;
 
-  if (type === 'text/css') {
+  if (type === ELEMENT_TYPE.CSS) {
     element = document.createElement('link');
     element.rel = 'stylesheet';
-    element.type = 'text/css';
+    element.type = ELEMENT_TYPE.CSS;
     element.href = url;
-  } else if (type === 'text/javascript') {
+
+    return element;
+  } else if (type === ELEMENT_TYPE.JS) {
     element = document.createElement('script');
-    element.type = 'text/javascript';
+    element.type = ELEMENT_TYPE.JS;
     element.src = url;
+
+    return element;
   }
 
   return element;
 }
-
 
 /**
  *
@@ -64,9 +69,9 @@ export function determineFileType(url) {
   const extension = url.substring(url.lastIndexOf('.'));
 
   if (extension === '.js') {
-    return 'text/javascript';
+    return ELEMENT_TYPE.JS;
   } else if (extension === '.css') {
-    return 'text/css';
+    return ELEMENT_TYPE.CSS;
   } else {
     return null;
   }

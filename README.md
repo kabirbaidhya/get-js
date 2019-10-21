@@ -31,7 +31,7 @@ $ npm install es6-promise
 Use it in your project with `require` or `import` as an ES module.
 
 ```javascript
-var get = require('get-js');
+const get = require('get-js');
 
 // ES2015+
 import get from 'get-js';
@@ -47,7 +47,7 @@ Here you go:
 
 ```javascript
 // Load a single script
-get('https://code.jquery.com/jquery-2.2.3.min.js').then(function() {
+get('https://code.jquery.com/jquery-3.4.1.min.js').then(function() {
   console.log('do something');
 });
 
@@ -61,6 +61,20 @@ get(['/js/abc.js', '/js/xyz.js'])
   });
 ```
 
+If you're using ES2015+ / TypeScript codebase, you can also use `async` / `await` syntax with `get`:
+
+```js
+import get from 'get-js';
+
+(async () => {
+  await get('https://code.jquery.com/jquery-3.4.1.min.js'); // Gets jQuery.
+
+  $(document).on('ready', () => {
+    console.log('Ready!');
+  });
+})();
+```
+
 ## Using with Angular
 
 **Note: This refers to [angular 1.x](https://angularjs.org/) projects.**
@@ -70,7 +84,7 @@ You can inject this in your angular code as a service.
 Require the angular module using
 
 ```javascript
-var angularGetJs = require('get-js/angular');
+const angularGetJs = require('get-js/angular');
 ```
 
 Or
@@ -99,6 +113,32 @@ angular.module('app').controller('MyController', [
   }
 ]);
 ```
+
+## Development
+
+To start developing or contributing to `get-js`, you'll need to clone the project first.
+
+1. Clone it locally.
+   ```
+   $ git clone git@github.com:kabirbaidhya/get-js.git
+   ```
+2. Install dependencies.
+
+   ```
+   $ yarn
+   ```
+
+3. Linting
+
+   ```
+   $ yarn lint
+   ```
+
+4. Generating a build.
+
+   ```
+   $ yarn build
+   ```
 
 ## License
 

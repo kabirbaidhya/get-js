@@ -61,7 +61,7 @@ export function createElement(url, type) {
  * @returns
  */
 export function determinFileType(url) {
-  let extension = url.substring(url.lastIndexOf('.'));
+  const extension = url.substring(url.lastIndexOf('.'));
   if (extension === '.js') {
     return 'text/javascript';
   } else if (extension === '.css') {

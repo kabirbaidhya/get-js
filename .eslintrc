@@ -1,0 +1,6 @@
+{
+  "env": { "es6": true, "node": true, "jasmine": true, "browser": true },
+  "parserOptions": { "ecmaVersion": 6, "sourceType": "module" },
+  "extends": "eslint-config-leapfrog",
+  "rules": { "eqeqeq": "off" }
+}

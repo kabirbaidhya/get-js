@@ -6,7 +6,7 @@ import {
   determinFileType,
 } from './util';
 
-let resolved = {};
+const resolved = {};
 
 /**
  * Load javascript url asynchronously
@@ -31,7 +31,7 @@ function loadScript(
   /**
    * This Function Calls Callback and adds the url to resolved list
    */
-  let invokeCallback = () => {
+  const invokeCallback = () => {
     resolved[url] = true;
 
     if (isFunction(callback)) {
@@ -47,7 +47,7 @@ function loadScript(
   }
 
   // Create element based on type
-  let element = createElement(url, type);
+  const element = createElement(url, type);
 
   // Assign the Function to be called on file loaded
   if (element.readyState) {
@@ -69,15 +69,17 @@ function loadScript(
   }
 
   // Assign the error callback function to be called on error occurance
-  element.onerror = () => {
+  element.onerror = e => {
     resolved[url] = false;
+    console.error(e);
+
     if (isFunction(errorCallback)) {
       errorCallback();
     }
   };
 
   // Append the elemnt to the parent element
-  let parent = document.body || document.head || document;
+  const parent = document.body || document.head || document;
   if (type === 'text/css') {
     parent = document.head;
   }
@@ -89,10 +91,10 @@ function loadScript(
  * and return a Promise instance.
  *
  * @param {*} src
- * @param {*} opts
+ * @param {*} type
  * @returns {Promise}
  */
-function get(src, type, opts) {
+function get(src, type) {
   if (isString(src)) {
     // If src is string url
 

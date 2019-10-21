@@ -30,7 +30,7 @@ export function isFunction(value) {
 
 /**
  *  This Function Creates element based on type passed
- *  currently limited to Link and script element
+ *  currently limited to Link and script element.
  *
  * @param {*} url
  * @param {*} type
@@ -53,18 +53,21 @@ export function createElement(url, type) {
   return element;
 }
 
+
 /**
- * This function gives script type/ link type in HTML based on url link provided
  *
- * @export
+ *
  * @param {*} url
  * @returns
  */
-export function determinFileType(url) {
+export function determineFileType(url) {
   const extension = url.substring(url.lastIndexOf('.'));
+
   if (extension === '.js') {
     return 'text/javascript';
   } else if (extension === '.css') {
     return 'text/css';
-  } else return null;
+  } else {
+    return null;
+  }
 }

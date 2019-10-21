@@ -3,16 +3,16 @@ import {
   isArray,
   isFunction,
   createElement,
-  determinFileType,
+  determineFileType,
 } from './util';
 
 const resolved = {};
 
 /**
- * Load javascript url asynchronously
+ * Load javascript url asynchronously.
  *
  * @param {*} url               The javascript url to load.
- * @param {*} type              Url type 'text/css or text/javascript'
+ * @param {*} type              Url type 'text/css or text/javascript'.
  * @param {*} callback          Callback function to invoke on success.
  * @param {*} errorCallback     Callback function to invoke on error.
  * @returns {void}
@@ -29,13 +29,14 @@ function loadScript(
   }
 
   /**
-   * This Function Calls Callback and adds the url to resolved list
+   * This Function Calls Callback and adds the url to resolved list.
    */
   const invokeCallback = () => {
     resolved[url] = true;
 
     if (isFunction(callback)) {
       callback();
+
       return;
     }
   };
@@ -43,6 +44,7 @@ function loadScript(
   // If url is already fetched return
   if (resolved[url]) {
     invokeCallback();
+
     return;
   }
 
@@ -79,7 +81,8 @@ function loadScript(
   };
 
   // Append the elemnt to the parent element
-  const parent = document.body || document.head || document;
+  let parent = document.body || document.head || document;
+
   if (type === 'text/css') {
     parent = document.head;
   }
@@ -98,8 +101,7 @@ function get(src, type) {
   if (isString(src)) {
     // If src is string url
 
-    console.log(type);
-    type = type || determinFileType(src);
+    type = type || determineFileType(src);
 
     return new Promise((resolve, reject) => {
       loadScript(src, type, () => resolve(true), () => reject());

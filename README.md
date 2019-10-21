@@ -100,6 +100,32 @@ angular.module('app').controller('MyController', [
 ]);
 ```
 
+## Development
+
+To start developing or contributing to `get-js`, you'll need to clone the project first.
+
+1. Clone it locally.
+   ```
+   $ git clone git@github.com:kabirbaidhya/get-js.git
+   ```
+2. Install dependencies.
+
+   ```
+   $ yarn
+   ```
+
+3. Linting
+
+   ```
+   $ yarn lint
+   ```
+
+4. Generating a build.
+
+   ```
+   $ yarn build
+   ```
+
 ## License
 
 This package is licensed under the [MIT License](LICENSE).

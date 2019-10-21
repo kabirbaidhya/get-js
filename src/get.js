@@ -1,11 +1,5 @@
-import {
-  isString,
-  isArray,
-  isFunction,
-  createElement,
-  determineFileType,
-} from './util';
 import { FILE_CSS, FILE_JAVASCRIPT } from './constants';
+import { isString, isArray, isFunction, createElement, determineFileType } from './util';
 
 const resolved = {};
 
@@ -18,12 +12,7 @@ const resolved = {};
  * @param {*} errorCallback     Callback function to invoke on error.
  * @returns {void}
  */
-function loadScript(
-  url,
-  type = FILE_JAVASCRIPT,
-  callback = () => {},
-  errorCallback = () => {}
-) {
+function loadScript(url, type = FILE_JAVASCRIPT, callback = () => {}, errorCallback = () => {}) {
   // Checks for empty/null values
   if (!url || !type) {
     errorCallback();
@@ -59,10 +48,7 @@ function loadScript(
      * Pass in the callback function on state changed - similar to onLoad
      */
     element.onreadystatechange = () => {
-      if (
-        element.readyState === 'loaded' ||
-        element.readyState === 'complete'
-      ) {
+      if (element.readyState === 'loaded' || element.readyState === 'complete') {
         element.onreadystatechange = null;
         invokeCallback();
       }

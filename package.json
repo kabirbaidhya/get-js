@@ -18,7 +18,8 @@
     "transpile": "babel src -d lib",
     "bundle": "./resources/scripts/bundle.sh",
     "build": "yarn transpile && yarn bundle",
-    "prepublish": "yarn build"
+    "prepublish": "yarn build",
+    "lint": "eslint src/*.js"
   },
   "repository": {
     "type": "git",
@@ -48,5 +49,8 @@
     "README.md",
     "package.json"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "eslint": "^6.5.1"
+  }
 }

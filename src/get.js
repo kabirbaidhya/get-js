@@ -18,8 +18,8 @@ function loadScript(
   errorCallback = () => {}
 ) {
   //fail safe check for empty/null values
-  if (!url ||!type) {
-    return;
+  if (!url || !type) {
+    errorCallback();
   }
 
   /**
@@ -31,6 +31,7 @@ function loadScript(
 
     if (isFunction(callback)) {
       callback();
+      return;
     }
   };
 
@@ -44,12 +45,12 @@ function loadScript(
   //create element based on type
   let element = null;
 
-  if (type == "text/css") {
+  if (type === "text/css") {
     element = document.createElement("link");
     element.rel = "stylesheet";
     element.type = "text/css";
     element.href = url;
-  } else if (type == "text/javascript") {
+  } else if (type === "text/javascript") {
     element = document.createElement("script");
     element.type = "text/javascript";
     element.src = url;
@@ -57,20 +58,21 @@ function loadScript(
 
   if (element.readyState) {
     // IE
-    element.onreadystatechange = function() {
-      if (element.readyState == "loaded" || element.readyState == "complete") {
+    element.onreadystatechange = () => {
+      if (
+        element.readyState === "loaded" ||
+        element.readyState === "complete"
+      ) {
         element.onreadystatechange = null;
         invokeCallback();
       }
     };
   } else {
-    // Others
-    element.onload = function() {
-      invokeCallback();
-    };
+    // assign invoke call back function to onload
+    element.onload = invokeCallback;
   }
 
-  element.onerror = function(e) {
+  element.onerror = () => {
     resolved[url] = false;
     if (isFunction(errorCallback)) {
       errorCallback();
@@ -79,7 +81,7 @@ function loadScript(
 
   //append to parent element
   let parent = document.body || document.head || document;
-  if (type == "text/css") {
+  if (type === "text/css") {
     parent = document.head;
   }
   parent.appendChild(element);
@@ -100,9 +102,9 @@ function get(src, type, opts) {
     //check if type is given by user otherwise self set based on extension
     if (!type) {
       let extension = src.substring(src.lastIndexOf("."));
-      if (extension == ".js") {
+      if (extension === ".js") {
         type = "text/javascript";
-      } else if (extension == ".css") {
+      } else if (extension === ".css") {
         type = "text/css";
       }
     }

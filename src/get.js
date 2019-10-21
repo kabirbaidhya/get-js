@@ -83,7 +83,7 @@ function loadScript(url, type = FILE_JAVASCRIPT, callback = () => {}) {
  * @param {*} type
  * @returns {Promise}
  */
-function get(src, type) {
+export function get(src, type) {
   // If `src` is a string - it is a single url.
   if (isString(src)) {
     type = type || determineFileType(src);
@@ -113,5 +113,3 @@ function get(src, type) {
 
   throw new Error('Invalid argument for get()');
 }
-
-export default get;

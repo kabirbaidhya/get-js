@@ -1682,10 +1682,10 @@ escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
-eslint-config-leapfrog@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-leapfrog/-/eslint-config-leapfrog-2.0.0.tgz#07eb924b8826ba4f3ce40de6e79f953e6cf51145"
-  integrity sha512-73lSVIpaWN9rtPt4lOybQ4jxrE+Ev/IoKzWCqKJ8dpFV/9B9M2r2kQ8lFCgABNhi1As4YcHK8Yjv3LkblPOBpQ==
+eslint-config-leapfrog@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-leapfrog/-/eslint-config-leapfrog-2.0.1.tgz#3bdc4634428051ee5ffcdc5eac41f51860e5a883"
+  integrity sha512-4LgRCqOr6FAaq8KbARg1dTsHv1iuVZ9B3iRxuRRBpC5/we5Kze6miENrkDlpQepCHF2TmBr50+/9TFwdW5xhHQ==
   dependencies:
     eslint-plugin-jsdoc "^3.9.1"
     eslint-plugin-react "^7.7.0"

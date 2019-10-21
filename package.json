@@ -51,5 +51,8 @@
     "README.md",
     "package.json"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "eslint": "^6.5.1"
+  }
 }

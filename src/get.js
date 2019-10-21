@@ -1,4 +1,11 @@
-import { isString, isArray, isFunction } from './util';
+import {
+  isString,
+  isArray,
+  isFunction,
+  createElement,
+  determineFileType,
+} from './util';
+import { FILE_CSS, FILE_JAVASCRIPT } from './constants';
 
 const resolved = {};
 
@@ -6,45 +13,66 @@ const resolved = {};
  * Load javascript url asynchronously.
  *
  * @param {*} url               The javascript url to load.
+ * @param {*} type              Url type 'text/css or text/javascript'.
  * @param {*} callback          Callback function to invoke on success.
  * @param {*} errorCallback     Callback function to invoke on error.
  * @returns {void}
  */
-function loadScript(url, callback, errorCallback) {
+function loadScript(
+  url,
+  type = FILE_JAVASCRIPT,
+  callback = () => {},
+  errorCallback = () => {}
+) {
+  // Checks for empty/null values
+  if (!url || !type) {
+    errorCallback();
+  }
+
+  /**
+   * This Function Calls Callback and adds the url to resolved list.
+   */
   const invokeCallback = () => {
     resolved[url] = true;
 
     if (isFunction(callback)) {
       callback();
+
+      return;
     }
   };
 
+  // If url is already fetched return
   if (resolved[url]) {
     invokeCallback();
 
     return;
   }
 
-  const script = document.createElement('script');
+  // Create element based on type
+  const element = createElement(url, type);
 
-  script.type = 'text/javascript';
-
-  if (script.readyState) {
-    // IE
-    script.onreadystatechange = () => {
-      if (script.readyState == 'loaded' || script.readyState == 'complete') {
-        script.onreadystatechange = null;
+  // Assign the Function to be called on file loaded
+  if (element.readyState) {
+    /*
+     * If the Browser is IE
+     * Pass in the callback function on state changed - similar to onLoad
+     */
+    element.onreadystatechange = () => {
+      if (
+        element.readyState === 'loaded' ||
+        element.readyState === 'complete'
+      ) {
+        element.onreadystatechange = null;
         invokeCallback();
       }
     };
   } else {
-    // Others
-    script.onload = () => {
-      invokeCallback();
-    };
+    element.onload = invokeCallback;
   }
 
-  script.onerror = e => {
+  // Assign the error callback function to be called on error occurance
+  element.onerror = e => {
     resolved[url] = false;
     console.error(e);
 
@@ -53,10 +81,13 @@ function loadScript(url, callback, errorCallback) {
     }
   };
 
-  script.src = url;
-  const parent = document.body || document.head || document;
+  // Append the elemnt to the parent element
+  let parent = document.body || document.head || document;
 
-  parent.appendChild(script);
+  if (type === FILE_CSS) {
+    parent = document.head;
+  }
+  parent.appendChild(element);
 }
 
 /**
@@ -64,20 +95,23 @@ function loadScript(url, callback, errorCallback) {
  * and return a Promise instance.
  *
  * @param {*} src
+ * @param {*} type
  * @returns {Promise}
  */
-function get(src) {
+function get(src, type) {
   if (isString(src)) {
-    return new Promise((resolve, reject) => {
-      loadScript(src, () => resolve(true), () => reject());
-    });
-  }
+    // If src is string url
+    type = type || determineFileType(src);
 
-  if (isArray(src)) {
+    return new Promise((resolve, reject) => {
+      loadScript(src, type, () => resolve(true), () => reject());
+    });
+  } else if (isArray(src)) {
+    // else if src data is arrray by recursion loop all the array and sub array
     let p = Promise.resolve(true);
 
     src.forEach(url => {
-      p = p.then(() => get(url));
+      p = p.then(() => get(url, type));
     });
 
     return p;

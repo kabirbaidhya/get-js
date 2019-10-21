@@ -4,7 +4,7 @@ import GetService from './GetService';
 /**
  * Angular JS service.
  */
-let angularGetJs = angular.module('angularGetJs', []);
+const angularGetJs = angular.module('angularGetJs', []);
 
 angularGetJs.factory('get', GetService);
 

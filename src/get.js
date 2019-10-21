@@ -1,6 +1,6 @@
 import { isString, isArray, isFunction } from './util';
 
-let resolved = {};
+const resolved = {};
 
 /**
  * Load javascript url asynchronously.
@@ -11,7 +11,7 @@ let resolved = {};
  * @returns {void}
  */
 function loadScript(url, callback, errorCallback) {
-  let invokeCallback = function() {
+  const invokeCallback = () => {
     resolved[url] = true;
 
     if (isFunction(callback)) {
@@ -25,12 +25,13 @@ function loadScript(url, callback, errorCallback) {
     return;
   }
 
-  let script = document.createElement('script');
+  const script = document.createElement('script');
+
   script.type = 'text/javascript';
 
   if (script.readyState) {
     // IE
-    script.onreadystatechange = function() {
+    script.onreadystatechange = () => {
       if (script.readyState == 'loaded' || script.readyState == 'complete') {
         script.onreadystatechange = null;
         invokeCallback();
@@ -38,21 +39,23 @@ function loadScript(url, callback, errorCallback) {
     };
   } else {
     // Others
-    script.onload = function() {
+    script.onload = () => {
       invokeCallback();
     };
   }
 
-  script.onerror = function(e) {
+  script.onerror = e => {
     resolved[url] = false;
-    console.log('error', e);
+    console.error(e);
+
     if (isFunction(errorCallback)) {
       errorCallback();
     }
   };
 
   script.src = url;
-  let parent = document.body || document.head || document;
+  const parent = document.body || document.head || document;
+
   parent.appendChild(script);
 }
 
@@ -61,15 +64,16 @@ function loadScript(url, callback, errorCallback) {
  * and return a Promise instance.
  *
  * @param {*} src
- * @param {*} opts
  * @returns {Promise}
  */
-function get(src, opts) {
+function get(src) {
   if (isString(src)) {
     return new Promise((resolve, reject) => {
       loadScript(src, () => resolve(true), () => reject());
     });
-  } else if (isArray(src)) {
+  }
+
+  if (isArray(src)) {
     let p = Promise.resolve(true);
 
     src.forEach(url => {

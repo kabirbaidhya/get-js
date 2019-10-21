@@ -31,7 +31,7 @@ function loadScript(url, callback, errorCallback) {
 
   if (script.readyState) {
     // IE
-    script.onreadystatechange = function() {
+    script.onreadystatechange = () => {
       if (script.readyState == 'loaded' || script.readyState == 'complete') {
         script.onreadystatechange = null;
         invokeCallback();
@@ -39,12 +39,12 @@ function loadScript(url, callback, errorCallback) {
     };
   } else {
     // Others
-    script.onload = function() {
+    script.onload = () => {
       invokeCallback();
     };
   }
 
-  script.onerror = function(e) {
+  script.onerror = e => {
     resolved[url] = false;
     console.error(e);
 

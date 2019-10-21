@@ -47,7 +47,7 @@ Here you go:
 
 ```javascript
 // Load a single script
-get('https://code.jquery.com/jquery-2.2.3.min.js').then(function() {
+get('https://code.jquery.com/jquery-3.4.1.min.js').then(function() {
   console.log('do something');
 });
 
@@ -67,7 +67,7 @@ If you're using ES2015+ / TypeScript codebase, you can also use `async` / `await
 import get from 'get-js';
 
 (async () => {
-  await get('https://code.jquery.com/jquery-2.2.3.min.js'); // Gets jQuery.
+  await get('https://code.jquery.com/jquery-3.4.1.min.js'); // Gets jQuery.
 
   $(document).on('ready', () => {
     console.log('Ready!');

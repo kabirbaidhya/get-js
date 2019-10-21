@@ -80,7 +80,7 @@ function loadScript(url, type = FILE_JAVASCRIPT, callback = () => {}) {
  * and return a Promise instance.
  *
  * @param {*} src
- * @param {*} type
+ * @param {string} type
  * @returns {Promise}
  */
 export function get(src, type) {

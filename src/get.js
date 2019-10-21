@@ -8,40 +8,38 @@ const resolved = {};
  *
  * @param {*} url               The javascript url to load.
  * @param {*} type              Url type 'text/css or text/javascript'.
- * @param {*} callback          Callback function to invoke on success.
- * @param {*} errorCallback     Callback function to invoke on error.
+ * @param {*} callback          Callback function to invoke on success / failure.
  * @returns {void}
  */
-function loadScript(url, type = FILE_JAVASCRIPT, callback = () => {}, errorCallback = () => {}) {
-  // Checks for empty/null values
-  if (!url || !type) {
-    errorCallback();
+function loadScript(url, type = FILE_JAVASCRIPT, callback = () => {}) {
+  // Validate url.
+  if (!url) {
+    return callback(new Error(`Invalid url provided '${url}'.`));
   }
 
-  /**
-   * This Function Calls Callback and adds the url to resolved list.
-   */
+  // Validate url.
+  if (!type) {
+    return callback(new Error(`Invalid file type provided '${type}'.`));
+  }
+
+  // Invokes the callback function and marks the url as resolved.
   const invokeCallback = () => {
     resolved[url] = true;
 
     if (isFunction(callback)) {
-      callback();
-
-      return;
+      return callback(false, true);
     }
   };
 
   // If url is already fetched return
   if (resolved[url]) {
-    invokeCallback();
-
-    return;
+    return invokeCallback();
   }
 
   // Create element based on type
   const element = createElement(url, type);
 
-  // Assign the Function to be called on file loaded
+  // Assign the function to be called on file loaded.
   if (element.readyState) {
     /*
      * If the Browser is IE
@@ -57,22 +55,23 @@ function loadScript(url, type = FILE_JAVASCRIPT, callback = () => {}, errorCallb
     element.onload = invokeCallback;
   }
 
-  // Assign the error callback function to be called on error occurance
+  // On error invoke the callback with error.
   element.onerror = e => {
     resolved[url] = false;
-    console.error(e);
+    console.error('Error', e);
 
-    if (isFunction(errorCallback)) {
-      errorCallback();
+    if (isFunction(callback)) {
+      return callback(e);
     }
   };
 
-  // Append the elemnt to the parent element
+  // Append the element to the parent element.
   let parent = document.body || document.head || document;
 
   if (type === FILE_CSS) {
     parent = document.head;
   }
+
   parent.appendChild(element);
 }
 
@@ -85,15 +84,24 @@ function loadScript(url, type = FILE_JAVASCRIPT, callback = () => {}, errorCallb
  * @returns {Promise}
  */
 function get(src, type) {
+  // If `src` is a string - it is a single url.
   if (isString(src)) {
-    // If src is string url
     type = type || determineFileType(src);
 
     return new Promise((resolve, reject) => {
-      loadScript(src, type, () => resolve(true), () => reject());
+      loadScript(src, type, (err, result) => {
+        if (err) {
+          return reject(err);
+        }
+
+        resolve(result);
+      });
     });
-  } else if (isArray(src)) {
-    // else if src data is arrray by recursion loop all the array and sub array
+  }
+
+  // If `src` is an array - it is a list of urls
+  // Recursively iterate over the array to get all of them.
+  if (isArray(src)) {
     let p = Promise.resolve(true);
 
     src.forEach(url => {

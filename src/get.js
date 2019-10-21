@@ -71,7 +71,9 @@ function get(src) {
     return new Promise((resolve, reject) => {
       loadScript(src, () => resolve(true), () => reject());
     });
-  } else if (isArray(src)) {
+  }
+
+  if (isArray(src)) {
     let p = Promise.resolve(true);
 
     src.forEach(url => {

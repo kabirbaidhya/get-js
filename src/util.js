@@ -27,3 +27,44 @@ export function isString(value) {
 export function isFunction(value) {
   return typeof value === 'function';
 }
+
+/**
+ *  This Function Creates element based on type passed
+ *  currently limited to Link and script element
+ *
+ * @param {*} url
+ * @param {*} type
+ * @returns
+ */
+export function createElement(url, type) {
+  let element = null;
+
+  if (type === 'text/css') {
+    element = document.createElement('link');
+    element.rel = 'stylesheet';
+    element.type = 'text/css';
+    element.href = url;
+  } else if (type === 'text/javascript') {
+    element = document.createElement('script');
+    element.type = 'text/javascript';
+    element.src = url;
+  }
+
+  return element;
+}
+
+/**
+ * This function gives script type/ link type in HTML based on url link provided
+ *
+ * @export
+ * @param {*} url
+ * @returns
+ */
+export function determinFileType(url) {
+  let extension = url.substring(url.lastIndexOf('.'));
+  if (extension === '.js') {
+    return 'text/javascript';
+  } else if (extension === '.css') {
+    return 'text/css';
+  } else return null;
+}

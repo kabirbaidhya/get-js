@@ -31,49 +31,53 @@ export function isFunction(value) {
 }
 
 /**
- *  This Function Creates element based on type passed
- *  currently limited to Link and script element.
+ * Creates element based on type passed
+ * currently limited to Link and script element.
  *
- * @param {*} url
- * @param {*} type
- * @returns
+ * @param {string} url
+ * @param {string} type
+ * @returns {HTMLElement}
  */
 export function createElement(url, type) {
-  let element = null;
-
   if (type === FILE_CSS) {
-    element = document.createElement('link');
+    const element = document.createElement('link');
+
     element.rel = 'stylesheet';
     element.type = FILE_CSS;
     element.href = url;
 
     return element;
-  } else if (type === FILE_JAVASCRIPT) {
-    element = document.createElement('script');
+  }
+
+  if (type === FILE_JAVASCRIPT) {
+    const element = document.createElement('script');
+
     element.type = FILE_JAVASCRIPT;
     element.src = url;
 
     return element;
   }
 
-  return element;
+  return null;
 }
 
 /**
- * This Function determines the file type based on the URL passed
- * currently only support JS and CSS files.
+ * Determines the file mime-type based on the url / path provided.
  *
- * @param {*} url
- * @returns
+ * @param {string} url
+ * @returns {string}
  */
 export function determineFileType(url) {
   const extension = url.substring(url.lastIndexOf('.'));
 
-  if (extension === '.js') {
-    return FILE_JAVASCRIPT;
-  } else if (extension === '.css') {
-    return FILE_CSS;
-  } else {
-    return null;
+  switch (extension) {
+    case '.js':
+      return FILE_JAVASCRIPT;
+
+    case '.css':
+      return FILE_CSS;
+
+    default:
+      return null;
   }
 }

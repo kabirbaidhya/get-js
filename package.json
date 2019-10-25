@@ -5,6 +5,7 @@
   "unpkg": "dist/",
   "jsdelivr": "dist/",
   "main": "index.js",
+  "types": "types/index.d.ts",
   "devDependencies": {
     "@babel/cli": "^7.6.0",
     "@babel/core": "^7.6.0",

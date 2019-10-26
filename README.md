@@ -3,7 +3,7 @@
 [![NPM Version](https://img.shields.io/npm/v/get-js.svg?style=flat-square)](https://www.npmjs.com/package/get-js)
 [![NPM Downloads](https://img.shields.io/npm/dt/get-js.svg?style=flat-square)](https://www.npmjs.com/package/get-js)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
-[![Build Status](https://travis-ci.org/beinganonymous/get-js.svg?branch=master)](https://travis-ci.org/beinganonymous/get-js)
+[![Build Status](https://travis-ci.com/beinganonymous/get-js.svg?branch=master)](https://travis-ci.org/beinganonymous/get-js)
 
 A lightweight library to asynchronously load scripts on the fly.
 
